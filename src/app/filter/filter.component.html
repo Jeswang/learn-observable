@@ -1,0 +1,11 @@
+<p>
+Filter {{name}} on tab {{tab}}
+</p>
+
+<div *ngIf="(filter$ | async) as filter">
+<ul *ngFor="let value of filter.values;">
+  <li>{{value}} 
+    <button *ngIf="value != filter.selected" (click)="select(value)">select</button>
+  </li>
+</ul>
+</div>
