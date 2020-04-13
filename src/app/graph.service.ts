@@ -11,11 +11,19 @@ export class Filter {
 
 @Injectable()
 export class GraphService {
+
+  // Cache the end filter results for each tab in a map.
   filters: Map<string, Observable<Array<Filter>>> = new Map();
 
+  // Cache the selected filter values in nested map. this is from user input.
   selectedFilterValues: Map<string, Map<string, string>> = new Map();
+
+  // Emit whenever above selectedFilterValues changes to cause filters and graphs to load.
   observableFilterValues: Map<string, BehaviorSubject<Map<string, string>>> = new Map();
 
+  // Cache the graph so that whenever there are multiple requests to the same graph, we don't
+  // trigger multiple requests.
+  // This is optional for us as we don't actaully have multiple places asking the same graph.
   observableGraphs: Map<{tab: string, name: string}, Observable<string>> = new Map();
 
   getFilter(tab, name) {
