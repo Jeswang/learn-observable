@@ -61,14 +61,14 @@ export class GraphService {
       this.getObservableFilterValues(tab).next(values);
   }
 
-  getSelectedFilterValues(tab) {
+  private getSelectedFilterValues(tab) {
       if (!this.selectedFilterValues.has(tab)) {
         this.selectedFilterValues.set(tab, new Map<string, string>());
       }
       return this.selectedFilterValues.get(tab);
   }
 
-  getObservableFilterValues(tab) {
+  private getObservableFilterValues(tab) {
     if (!this.observableFilterValues.has(tab)) {
       var values = this.getSelectedFilterValues(tab);
       this.observableFilterValues.set(tab, new BehaviorSubject(values));
@@ -77,7 +77,7 @@ export class GraphService {
     return this.observableFilterValues.get(tab)
   }
 
-  fetchFilters(tab) {
+  private fetchFilters(tab) {
     const selected = this.getObservableFilterValues(tab)
     return selected.pipe(
       switchMap(selectedValue => {

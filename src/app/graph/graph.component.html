@@ -1,3 +1,14 @@
-<p>
-graph at tab {{tab}} {{graph$ | async}}
-</p>
+<div>
+graph at tab {{tab}} 
+
+<div *ngIf="(graph$ | async) as graph else elseBlock" >
+{{graph$ | async}}
+</div>
+
+<ng-template #elseBlock>
+  <div>
+  Loading...
+  </div>
+</ng-template>
+
+</div>
